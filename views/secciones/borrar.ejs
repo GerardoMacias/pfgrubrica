@@ -1,0 +1,125 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Borrar <% if(secc.es_criterio) {%>criterio<%}else{%>sección<%}%> de rúbrica</h1>
+                <hr>
+                <!--  -->
+
+
+                <div style="width: 90%; margin: 25px auto;">
+                    <form id="formBorrarSeccion" action="/plantillas/<%=secc.idrubrica%>/secciones/<%=secc.idsecciones%>?_method=DELETE" method="POST">
+                        <div class="row form-group">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="well well-sm">
+                                    <div class="row form-group">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <p class="text-left"><b>Sección a borrar:</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                            <label class="control-label">Nivel: </label><p><%=secc.nivel%></p>
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                            <label class="control-label">Peso: </label>
+                                            <p><%=secc.peso%></p>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <label class="control-label">Descripción: </label>
+                                            <p><%=secc.descripcion%></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                            
+                        <% var i=0; %>
+                        <% if (hermanos.length>0){%>
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <label class="control-label">Actualice los pesos del resto de <% if(secc.es_criterio){ %>criterios<% } else {%>secciones<%};%></label>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <label class="control-label">Peso</label>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <label class="control-label">Descripción</label>
+                                </div>
+                            </div>
+                            <% while(i<hermanos.length){ %>
+                                
+                                    <div class="row form-group">
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                            <input type="hidden" id="upd_id_<%=i%>" name="upd_id[<%=i%>]" value="<%=hermanos[i].idsecciones%>">
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                            <input class="form-control pesos" type="text" id="upd_peso_<%=i%>" name="upd_peso[<%=i%>]" value="<%=hermanos[i].peso%>" <%if(i==0){%>autofocus<%}%> >
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <p><%=hermanos[i].descripcion%></p>
+                                        </div>
+                                    </div>
+                                
+                                <% i++; %>
+                            <% }; %>
+                        <% }; %>
+
+                        <div class="row form-group">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <% if (hermanos.length>0){%>
+                                    <label class="control-label" >Total:</label>
+                                <% };%>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <input class="form-control suma_total" type="<% if (hermanos.length>0){%>text<%}else{%>hidden<% };%>" id="pesos_totales" name="pesos_totales" <% if (hermanos.length<=0){%>value="<%=secc.peso;%>"<% };%> disabled>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button class="btn btn-lg btn-danger btn-block" onclick="return confirm('¿Confirma el borrado de <% if(secc.es_criterio){ %>el criterio?<% } else {%>la sección? Todas las secciones y criterios que dependen de la misma serán borrados.<%};%>')">Borrar</button>
+                        </div>
+
+                    </form>
+
+
+                    <a href="/plantillas/<%=secc.idrubrica%>/edit">Volver</a>
+                </div>   
+                
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+<script src="/scripts/secciones_borrar.js"></script>
+
+<% include ../partials/footer %>
+
+

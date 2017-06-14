@@ -1,0 +1,44 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Listado de plantillas de Rúbricas</h1>
+                <hr>
+                <!-- Table -->
+                <div class="table-responsive">
+                    <table class="table table-condensed" id="listadoPlantillas">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Titulo</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            <% if(typeof plantillas !== 'undefined'){ %>
+                                <% plantillas.forEach(function(p){ %>
+                                <tr <% if (!p.completa) {%> class="incompleta"<%;};%>>
+                                    <td><%= p.idrubrica %></td>
+                                    <td><%= p.titulo %></td>
+                                    <td><%= p.descripcion %></td>
+                                </tr>
+                                <% }); %>
+                            <% }; %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+
+<script src="scripts/plantillas.js"></script>
+
+<% include ../partials/footer %>

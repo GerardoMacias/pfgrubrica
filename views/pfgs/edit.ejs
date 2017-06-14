@@ -1,0 +1,119 @@
+
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Editar PFG</h1>
+                <hr>
+                <!--  -->
+                
+                <div class="panel-body">
+                    <div style="width: 90%; margin: 25px auto;">
+                        <form id="formEditSeccion" action="/pfgs/<%=pfg.idpfg%>?_method=PUT" method="POST">
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <label class="control-label ">Título</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <input class="form-control" type="text" id="titulo" name="titulo" value="<%=pfg.titulo%>" required autofocus>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <label class="control-label ">Descripción</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <input class="form-control" type="text" id="descripcion" name="descripcion" value="<%=pfg.descripcion%>" required >
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <label class="control-label ">Código PFG propuesto</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <input class="form-control" type="text" id="propuesto" name="propuesto" value="<%=pfg.codigo_prop%>" style="width:auto;">
+                                </div>
+                            </div>
+                            
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <label class="control-label ">Alumno</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <select class="form-control" id="alumno" name="alumno" style="width:auto;">
+                                        <% if(pfg.alumno){ %>
+                                            <option value="no_modificar"><%=pfg.a_a%>, <%=pfg.a_n%></option>
+                                                <option value="no_asignado">No asignado</option>
+                                        <% } else { %>
+                                            <option value="no_asignado">No asignado</option>
+                                        <% }; %>
+                                                <% alums.forEach(function(a){ %>
+                                                    <% if(a.idusuarios!=pfg.alumno){ %>
+                                                        <option value="<%= a.idusuarios %>"><%= a.apellidos %>, <%= a.nombre %></option>
+                                                    <% }; %>
+                                                <% }); %>
+                                        
+                                    </select>      
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <label class="control-label ">Tutor</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <select class="form-control" id="tutor" name="tutor" style="width:auto;">
+                                        <% if(pfg.tutor){ %>
+                                            <option value="no_modificar"><%=pfg.t_a%>, <%=pfg.t_n%></option>
+                                        <% } else { %>
+                                            <option value="no_asignado">No asignado</option>
+                                        <% }; %>
+                                                <% profs.forEach(function(p){ %>
+                                                    <% if(p.idusuarios!=pfg.tutor){ %>
+                                                        <option value="<%= p.idusuarios %>"><%= p.apellidos %>, <%= p.nombre %></option>
+                                                    <% }; %>
+                                                <% }); %>
+                                    </select>      
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <label class="control-label ">Rúbrica</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <select class="form-control" id="rubrica" name="rubrica" style="width:auto;">
+                                        <option value="no_modificar"><%=pfg.t_r%></option>
+                                            <% rubs.forEach(function(r){ %>
+                                                <option value="<%= r.idrubrica %>"><%= r.titulo %></option>
+                                            <% }); %>
+                                    </select> 
+                                </div>
+                            </div>
+                            
+                            <div style="width: 50%; margin: 25px auto;">
+                                <div class="form-group">
+                                    <button class="btn btn-lg btn-primary btn-block">Editar</button>
+                                    <a href="/pfgs/<%=pfg.idpfg%>">Volver</a>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>  
+                </div>
+
+            </div> <!-- panel -->
+
+        </div>
+    </div>
+</div>
+
+<script src="/scripts/pfgs_edit.js"></script>
+
+<% include ../partials/footer %>

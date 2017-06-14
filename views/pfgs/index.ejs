@@ -1,0 +1,70 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <!-- Menu ppal -->
+      <% include ../partials/menu-principal %>
+    </div>
+    <div class="col-md-9">
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <h1 style="text-align: center">Listado de PFGs</h1>
+        <hr>
+
+        <!-- Table -->
+        <div class="table-responsive">
+          <table id="tabla_pfgs" class="table table-condensed"> <!-- table-bordered -->
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Título</th>
+                <th>Tutor</th>
+                <th>Alumno</th>
+                <th>Rúbrica</th>
+                <th>Prop.</th>
+              </tr>
+            </thead> 
+            <tfoot>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Título</th>
+                <th>Tutor</th>
+                <th>Alumno</th>
+                <th>Rúbrica</th>
+                <th>Prop.</th>
+              </tr>
+            </tfoot> 
+            <tbody>
+              <% if(typeof pfgs !== 'undefined'){ %>
+              <% pfgs.forEach(function(p){ %>
+              <tr>
+                <td><%= p.idpfg %></td>
+                <td><%= p.alumno %></td>
+                <td><%= p.tutor %></td>
+                <td><%= p.idrubrica %></td>
+                <td class="col-sm-3"><%= p.titulo %></td>
+                <td class="col-sm-3"><%= p.t_n %> <%= p.t_a %></td>
+                <td class="col-sm-3"><%= p.a_n %> <%= p.a_a %></td>
+                <td class="col-sm-2"><%= p.t_r %></td>
+                <td class="col-sm-1"><%= p.codigo_prop %></td>
+              </tr>
+              <% }); %>
+              <% }; %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/scripts/pfgs.js"></script>
+
+<% include ../partials/footer %>

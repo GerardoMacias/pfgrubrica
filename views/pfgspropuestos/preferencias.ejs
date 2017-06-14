@@ -1,0 +1,76 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <!-- Menu ppal -->
+      <% include ../partials/menu-principal %>
+    </div>
+    <div class="col-md-9">
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <h1 style="text-align: center">Asignación de PFGs propuestos</h1>
+        <hr>
+        <div style="width: 60%; margin: 25px auto;">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="well well-sm">
+              <p class="text-center"><b>Preferencias de los alumnos: seleccione una para asignarla</b></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+          <table id="tabla_pfgs_p" class="table table-condensed"> <!-- table-bordered -->
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Código</th>
+                <th>Título</th>
+                <th>Tutor</th>
+                <th>Preferencia</th>
+                <th>Alumno</th>
+              </tr>
+            </thead> 
+            <tfoot>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Código</th>
+                <th>Título</th>
+                <th>Tutor</th>
+                <th>Preferencia</th>
+                <th>Alumno</th>
+              </tr>
+            </tfoot> 
+            <tbody>
+              <% if(typeof pfgs_p !== 'undefined'){ %>
+                <% for (var i=0; i<pfgs_p.length; i++){%>
+                  <tr>
+                    <td><%= pfgs_p[i].idseleccion_pfgs %></td>
+                    <td><%= pfgs_p[i].alumno %></td>
+                    <td><%= pfgs_p[i].idpfg %></td>
+                    <td class="col-sm-1"><%= pfgs_p[i].codigo_prop %></td>
+                    <td class="col-sm-4"><%= pfgs_p[i].titulo %></td>
+                    <td class="col-sm-3"><%= pfgs_p_tutor[i].t_a %>, <%= pfgs_p_tutor[i].t_n %></td>
+                    <td class="col-sm-1"><%= pfgs_p[i].preferencia %></td>
+                    <td class="col-sm-3"><%= pfgs_p[i].a_a %>, <%= pfgs_p[i].a_n %></td>
+                  </tr>
+                <% } %>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/scripts/pfgspropuestos_pref.js"></script>
+
+<% include ../partials/footer %>

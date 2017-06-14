@@ -1,0 +1,102 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Editar usuario</h1>
+
+                <!--  -->
+                <div style="width: 60%; margin: 25px auto;">
+                    <form class="form-horizontal" id="form_edit_usuario" action="/usuarios/<%=usuario.idusuarios%>?_method=PUT" method="POST">
+                        <div class="form-group">
+                            <label for="nombre" class="col-sm-3 control-label">Nombre</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="nombre" name="nombre" value="<%=usuario.nombre%>" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidos" class="col-sm-3 control-label">Apellidos</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="apellidos" name="apellidos" value="<%=usuario.apellidos%>" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="expediente" class="col-sm-3 control-label">Expediente</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="expediente" name="expediente" value="<%=usuario.expediente%>" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dni" class="col-sm-3 control-label">DNI</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="dni" name="dni" value="<%=usuario.dni%>" minlength="9" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-3 control-label">E-mail</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="email" id="email" name="email" value="<%=usuario.email%>" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-3 control-label">Contraseña</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="password" id="password" name="password" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmar_password" class="col-sm-3 control-label">Repetir Contraseña</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="password" id="confirmar_password" name="confirmar_password" value="">
+                            </div>
+                        </div>
+                        <% if ((typeof usuarioActual !== 'undefined') && usuarioActual.admin) { %>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Rol</label>
+                                <div class="col-sm-9">
+                                    <div class="radio">
+                                        <label>
+                                        <input type="radio" name="rol" id="alumno" value="0" <%=!usuario.rol?"checked":""%>>
+                                            Alumno
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                        <input type="radio" name="rol" id="profesor" value="1" <%=usuario.rol?"checked":""%>>
+                                            Profesor
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                        <input type="radio" name="rol" id="admin" value="2" <%=usuario.admin?"checked":""%>>
+                                            Administrador
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }; %>
+                        <div class="form-group">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-lg btn-primary btn-block">Editar</button>
+                                <a href="/usuarios/<%=usuario.idusuarios%>">Volver</a>
+                            </div>
+                            <div class="col-sm-3"></div>   
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/scripts/usuarios_editar.js"></script>
+
+<% include ../partials/footer %>

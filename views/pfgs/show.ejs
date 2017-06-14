@@ -1,0 +1,267 @@
+
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">PFG</h1>
+                <hr>
+                <!--  -->
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Titulo</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <p><%=pfgs.titulo%></p>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <% if(pfgs.codigo_prop){ %>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Código prop.</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <p><%=pfgs.codigo_prop%></p>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <%};%>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Descripción</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <p><%=pfgs.descripcion%></p>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Alumno</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <% if(pfgs.alumno){ %>
+                            <p><%=pfgs.a_n%> <%=pfgs.a_a%></p>
+                        <%} else {%>
+                            <p>El PFG no se encuentra asignado a ningún alumno.</p>
+                        <%};%>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Tutor</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <p><%=pfgs.t_n%> <%=pfgs.t_a%></p>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Rúbrica</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <% if(pfgs.idrubrica){ %>
+                            <p><%=pfgs.t_r%></p>
+                        <%} else {%>
+                            <p>El PFG no tiene rúbrica asignada.</p>
+                        <%};%>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h3 style="text-align: center">Tribunal</h3>
+                                                
+                    
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Presidente</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <% trib.forEach(function(t){ %>
+                                <% if(t.rol=='presidente'){ %>
+                                    <p><%=t.u_n%> <%=t.u_a%></p>
+                                <% } %>
+                            <% }); %>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Secretario</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <% trib.forEach(function(t){ %>
+                                <% if(t.rol=='secretario'){ %>
+                                    <p><%=t.u_n%> <%=t.u_a%></p>
+                                <% } %>
+                            <% }); %>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <% var vocal1=null, vocal2=null, vocal3=null %>
+                    <% i=0, enc=false; %>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Vocal 1</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                           <% while(!enc && i<trib.length){ %>
+                                <% if(trib[i].rol=='vocal'){ %>
+                                    <p><%=trib[i].u_a%>, <%=trib[i].u_n%></p>
+                                    <% vocal1=trib[i].idprofesor; enc=true; %>
+                                <% } %>
+                                <% i++;%>
+                            <% }; %>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <% i=0, enc=false; %>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Vocal 2</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <% while(!enc && i<trib.length){ %>
+                                <% if(trib[i].rol=='vocal'&& trib[i].idprofesor!=vocal1){ %>
+                                    <p><%=trib[i].u_a%>, <%=trib[i].u_n%></p>
+                                    <% vocal2=trib[i].idprofesor; enc=true; %>
+                                <% } %>
+                                <% i++;%>
+                            <% }; %>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <% i=0, enc=false; %>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Vocal 3</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <% while(!enc && i<trib.length){ %>
+                                <% if(trib[i].rol=='vocal'&& trib[i].idprofesor!=vocal1 && trib[i].idprofesor!=vocal2){ %>
+                                    <p><%=trib[i].u_a%>, <%=trib[i].u_n%></p>
+                                    <% vocal3=trib[i].idprofesor; enc=true; %>
+                                <% } %>
+                                <% i++;%>
+                            <% }; %>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                <hr>
+
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <a class="btn btn-sm btn-warning" href="/pfgs/<%= pfgs.idpfg %>/edit">Editar</a>
+                            <a class="btn btn-sm btn-warning" href="/pfgs/<%= pfgs.idpfg %>/tribunal/edit">Editar Tribunal</a>
+                            <form class="form_borrado_pfg formBorrado" action="/pfgs/<%= pfgs.idpfg %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-sm btn-danger" value="Borrar" onclick="return confirm('¿Confirma el borrado del PFG? Se eliminará toda la información del mismo y de su rúbrica');">
+                            </form>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <a href="/pfgs" class="center">Volver</a>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div> 
+                </div>
+                
+
+            </div> <!-- panel -->
+
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>
+
+
+

@@ -1,0 +1,109 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Cursos registrados</h1>
+                <hr>
+                <div style="width: 90%; margin: 25px auto;">
+
+                    <% var actual; %>
+                    <% cur.forEach(function(c){ %>
+                        <% if (c.es_actual){ %>
+                            <% actual=c.idcurso;%>
+                        <%}%>
+                    <% });%>    
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="well well-sm">
+                                <h4 class="text-center">Curso actual: <%=actual;%></h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Cursos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% cur.forEach(function(c){ %>
+                                        <tr>
+                                            <% if (c.es_actual){ %>
+                                                <td class="info text-center"><%=c.idcurso%></td>
+                                            <%} else {%>
+                                                <td class="text-center"><%=c.idcurso%></td>
+                                            <%}%>
+                                        </tr>
+                                    <% });%>
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    
+                        
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <form class="formNuevoCurso" action="/cursos" method="POST">
+                                    <input type="submit" class="btn btn-md btn-warning" value="Añadir nuevo curso" onclick="return confirm('¿Confirma crear un nuevo curso? Se archivará toda la información del curso actual.');">
+                                </form>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <form class="formBorradoCurso formBorrado" action="/cursos/?_method=DELETE" method="POST">
+                                    <input type="submit" class="btn btn-md btn-danger formBorrado" value="Borrar curso actual" onclick="return confirm('¿Confirma el borrado del curso actual? Se eliminará toda la información del mismo.');">
+                                </form>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <a href="/" class="center">Volver</a>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                
+                            </div>
+                        </div> 
+                    </div>
+
+                </div>
+
+          </div>
+      </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>

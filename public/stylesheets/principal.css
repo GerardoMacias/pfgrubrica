@@ -1,0 +1,35 @@
+
+
+
+.form_borrado_usuario  {
+    display: inline;
+}
+.form_borrado_plantilla {
+    display: inline;
+}
+.form_borrado_seccion {
+    display: inline;
+}
+
+.formBorrado{
+    display: inline;
+}
+
+#rubrica_row .raiz {
+    background-color:#6495ED;
+}
+
+#rubrica_row .nodo {
+    background-color:#E0FFFF;
+}
+#rubrica_row .hoja {
+    background-color:#F0F8FF;
+}
+
+/*#tabla_rubrica tr td:nth-child(2){
+    width:5%;
+}*/
+
+.incompleta{
+    background-color: #ffcc99;
+}

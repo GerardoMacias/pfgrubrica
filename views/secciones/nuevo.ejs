@@ -1,0 +1,126 @@
+
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Añadir <%=tipo%></h1>
+                <hr>
+                <!-- res.render("secciones/nuevo", {secc: secc[0], hijos: hijos, tipo: req.query.tipo_seccion, page: 'plantillas'}); -->
+
+                <div style="width: 90%; margin: 25px auto;">
+
+                    <div class="row form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="well well-sm">
+                                <div class="row form-group">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <p class="text-left"><b>Sección a la que se añaden:</b></p>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <label class="control-label">Nivel: </label><p><%=secc.nivel%></p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <label class="control-label">Peso: </label><p><%=secc.peso%></p>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                        <label class="control-label">Descripción: </label><p><%=secc.descripcion%></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="formAltaSecciones" action="/plantillas/<%=secc.idrubrica%>/secciones" method="POST">
+                        <div class="row form-group">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <input type="hidden" id="num_anadir" name="num_anadir" value="<%=num_anadir%>">
+                                <input type="hidden" id="tipo" name="tipo" value="<%=tipo%>">
+                                <input type="hidden" id="nivel" name="nivel" value="<%=secc.nivel%>">
+                                <input type="hidden" id="idseccion" name="idseccion" value="<%=secc.idsecciones%>">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Peso</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <label class="control-label">Descripción</label>
+                            </div>
+                        </div>
+                        <% var i=0; %>
+                        <% if (hijos){%>
+                            <% while(i<hijos.length){ %>
+                                <div class="row form-group">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <input type="hidden" id="upd_id_<%=i%>" name="upd_id[<%=i%>]" value="<%=hijos[i].idsecciones%>">
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <input class="form-control pesos" type="text" id="upd_peso_<%=i%>" name="upd_peso[<%=i%>]" value="<%=hijos[i].peso%>" <%if(i==0){%>autofocus<%}%> >
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                        <p><%=hijos[i].descripcion%></p>
+                                    </div>
+                                </div>
+                                <% i++; %>
+                            <% }; %>
+                        <% }; %>
+
+                        <% for(var x=0; x<num_anadir; x++){ %>
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    <input class="form-control pesos" type="text" id="nuevo_peso_<%=x%>" name="nuevo_peso[<%=x%>]" placeholder="Peso" required <%if(i==0){%>autofocus<%}%>>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <input class="form-control" type="text" id="nuevo_preg_<%=x%>" name="nuevo_preg[<%=x%>]" placeholder="Descripción" required>
+                                </div>
+                            </div>
+                            <% i++; %>
+                        <% }; %>
+                        <div class="row form-group">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Total:</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <input class="form-control suma_total" type="text" id="pesos_totales" name="pesos_totales" disabled>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button class="btn btn-lg btn-primary btn-block">Alta</button>
+                        </div>
+
+                    </form>
+                    <a href="/plantillas/<%=secc.idrubrica%>/edit" class="center">Volver</a>
+                </div>
+                       
+                
+            </div>  
+        </div>
+    </div>
+</div>
+
+<script src="/scripts/secciones_nuevo.js"></script>
+
+<% include ../partials/footer %>

@@ -1,0 +1,105 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Evaluar criterio de rúbrica</h1>
+                <hr>
+                <!--  -->
+
+
+                <div style="width: 90%; margin: 25px auto;">
+                    
+                    <div class="row form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="well well-sm">
+                                <div class="row form-group">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <p class="text-left"><b>Criterio a evaluar:</b></p>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <label class="control-label">Nivel: </label><p><%=secc.nivel%></p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <label class="control-label">Peso: </label><p><%=secc.peso%></p>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                        <label class="control-label">Descripción: </label><p><%=secc.descripcion%></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% if(secc.es_criterio){ %>
+                    <form id="formEditPesos" action="/rubricas/<%=secc.idrubrica%>/criterios/<%=secc.idsecciones%>?_method=PUT" method="POST"> 
+                        <input type="hidden" id="padre" name="padre" value="<%=secc.padre%>">
+                        <input type="hidden" id="tribunal" name="tribunal" value="<%=tribunal%>">
+                        <input type="hidden" id="tutor" name="tutor" value="<%=tutor%>">
+                        <hr>
+                        <% var i=0; %>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Preguntas</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <% pregs.forEach(function(p){ %>
+                                    <div class="row">
+                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                            <div class="radio">
+                                                <label><input type="radio" id="eval_<%=i%>" name="eval" value="<%=p.peso%>" <% if(i==0){%>checked<%};%>></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                            <label class="control-label">Peso: </label><p><%=p.peso%>%</p>
+                                        </div> 
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <label class="control-label">Descripción: </label><p><%=p.descripcion%></p>
+                                        </div> 
+                                    </div>
+                                    <% i++; %>
+                                <%});%>
+                            </div>  
+                        </div>
+                        <hr>       
+                        
+                        
+                        <div class="form-group">
+                            <button class="btn btn-lg btn-primary btn-block">Editar</button>
+                        </div>
+                    </form>
+                    <%} else {%>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Preguntas</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <label class="control-label"><p>No se puede evaluar directamente una sección. Evalúe previamente sus criterios.</p></label>
+                            </div> 
+                        </div>
+                    <%}%>
+
+
+                    <a href="/rubricas/<%=secc.idrubrica%>">Volver</a>
+                </div>   
+                
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+<!-- <script src="/scripts/secciones_editar.js"></script> -->
+
+<% include ../partials/footer %>
+
+
+

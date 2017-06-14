@@ -1,0 +1,180 @@
+
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Tribunal del PFG</h1>
+                <hr>
+                <!--  -->
+
+                <div style="width: 90%; margin: 25px auto;">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Titulo</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                            <p><%=pfg.titulo%></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Descripción</label>
+                        </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                            <p><%=pfg.descripcion%></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Tutor</label>
+                        </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                            <p><%=pfg.u_a%>, <%=pfg.u_n%></p>
+                        </div>
+                    </div>
+                    <hr>
+                    
+                                                
+                   
+                    <div class="row form-group">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Presidente</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <% trib.forEach(function(t){ %>
+                                <% if(t.rol=='presidente'){ %>
+                                    <p><%=t.u_n%> <%=t.u_a%></p>
+                                <% } %>
+                            <% }); %>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Secretario</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <% trib.forEach(function(t){ %>
+                                <% if(t.rol=='secretario'){ %>
+                                    <p><%=t.u_n%> <%=t.u_a%></p>
+                                <% } %>
+                            <% }); %>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <% var vocal1=null, vocal2=null, vocal3=null %>
+                    <% i=0, enc=false; %>
+                    <div class="row form-group">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Vocal 1</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                           <% while(!enc && i<trib.length){ %>
+                                <% if(trib[i].rol=='vocal'){ %>
+                                    <p><%=trib[i].u_a%>, <%=trib[i].u_n%></p>
+                                    <% vocal1=trib[i].idprofesor; enc=true; %>
+                                <% } %>
+                                <% i++;%>
+                            <% }; %>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <% i=0, enc=false; %>
+                    <div class="row form-group">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Vocal 2</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <% while(!enc && i<trib.length){ %>
+                                <% if(trib[i].rol=='vocal'&& trib[i].idprofesor!=vocal1){ %>
+                                    <p><%=trib[i].u_a%>, <%=trib[i].u_n%></p>
+                                    <% vocal2=trib[i].idprofesor; enc=true; %>
+                                <% } %>
+                                <% i++;%>
+                            <% }; %>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <% i=0, enc=false; %>
+                    <div class="row form-group">
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Vocal 3</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <% while(!enc && i<trib.length){ %>
+                                <% if(trib[i].rol=='vocal'&& trib[i].idprofesor!=vocal1 && trib[i].idprofesor!=vocal2){ %>
+                                    <p><%=trib[i].u_a%>, <%=trib[i].u_n%></p>
+                                    <% vocal3=trib[i].idprofesor; enc=true; %>
+                                <% } %>
+                                <% i++;%>
+                            <% }; %>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            
+                        </div>
+                    </div>
+                    <hr>
+
+
+                    
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                            <a class="btn btn-md btn-warning" href="/pfgs/<%= pfg.idpfg %>/tribunal/edit">Editar</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <a href="/pfgs/<%= pfg.idpfg %>" class="center">Volver</a>
+                        </div>
+                    </div> 
+                    
+
+                </div>
+
+            </div> <!-- panel -->
+
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>
+
+
+
+

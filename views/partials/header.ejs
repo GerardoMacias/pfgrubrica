@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>PFG - UFV</title>
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+
+
+        <!-- Custom CSS -->
+        <!--
+        <link rel="stylesheet" href="/stylesheets/simple-sidebar.css" >-->
+        <link rel="stylesheet" href="/stylesheets/principal.css">
+        <link rel="stylesheet" href="/stylesheets/plantillas_nuevo.css">
+
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/additional-methods.min.js"></script>
+        
+    </head>
+    <body>
+
+        <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">PFG - UFV</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="<%= typeof page !== 'undefined' && page === 'menu' ? 'active' : '' %>"><a href="/">Menu</a></li>
+                    <% if(usuarioActual){ %>
+                        <li><a href="#">Curso <%= usuarioActual.idcurso %></a></li>
+                    <% } %>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <% if(!usuarioActual){ %>
+                        <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login <i class="fa fa-user" aria-hidden="true"></i></a></li>
+                        <li class="<%= typeof page !== 'undefined' && page === 'registro' ? 'active' : '' %>"><a href="/register">Registro <i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
+                    <% } else { %>
+                        <li><a href="#"><%= usuarioActual.apellidos %>, <%= usuarioActual.nombre %></a></li>
+                        <li><a href="#">
+                        <% if(usuarioActual.admin){ %>
+                            ADMINISTRADOR
+                        <% } else { %>
+                            <% if(!usuarioActual.rol){ %>
+                                ALUMNO
+                            <% } else { %>
+                                PROFESOR
+                            <% } %>
+                        <% } %>
+                        </a></li>
+                        <li><a href="/logout">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                    <% } %>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div> <!-- /.container -->
+
+
+
+    

@@ -1,0 +1,154 @@
+
+
+<div class="list-group">
+
+    <% if((typeof page !== 'undefined') && page == 'menu'){ %>
+        <p class="lead">Menú principal</p>
+        <% if((typeof usuarioActual !== 'undefined') && usuarioActual.admin){ %> <!-- Administrador -->
+            <a href="/usuarios" class="list-group-item">Gestión de usuarios</a> 
+            <a href="/plantillas" class="list-group-item">Plantillas de rúbricas</a>
+            <a href="/rubricas" class="list-group-item">Rúbricas</a>
+            <a href="/cursos" class="list-group-item">Gestión de Cursos</a>
+            <a href="/pfgs" class="list-group-item">PFGs</a>
+            <a href="/comisiones" class="list-group-item">Comisión</a>
+            <!-- <a href="#" class="list-group-item">Estadísticas</a> -->
+        <% } else if((typeof usuarioActual !== 'undefined') && usuarioActual.rol){ %> <!-- Profesor -->
+            <a href="/usuarios/<%=usuarioActual.idusuarios%>" class="list-group-item">Datos de usuario</a>
+            <a href="/pfgs" class="list-group-item">PFGs</a>
+            <a href="/rubricas" class="list-group-item">Rúbricas</a>
+        <% } else { %> <!-- Alumno -->
+            <a href="/usuarios/<%=usuarioActual.idusuarios%>" class="list-group-item"><span class="glyphicon glyphicon-user pull-right"></span>Datos de usuario</a>
+            <a href="/pfgspropuestos/seleccion" class="list-group-item">Selección PFG</a>
+            <a href="/rubricas" class="list-group-item">Rúbrica</a>
+        <% } %>
+
+
+
+
+
+
+
+    <% } else if((typeof page !== 'undefined') && page == 'usuarios'){ %> 
+
+        <% if((typeof usuarioActual !== 'undefined') && usuarioActual.admin){ %> <!-- Administrador -->
+            <p class="lead">Gestión de usuarios</p>
+            <a href="/usuarios" class="list-group-item">Gestión de usuarios</a>
+            <a href="/usuarios/nuevo" class="list-group-item">Nuevo usuario</a>
+        <% } else if((typeof usuarioActual !== 'undefined') && usuarioActual.rol){ %> <!-- Profesor -->
+            <p class="lead">Datos de usuario</p>
+            <a href="/usuarios/<%=usuarioActual.idusuarios%>" class="list-group-item">Datos de usuario</a>
+            <a href="/usuarios/<%=usuarioActual.idusuarios%>/edit" class="list-group-item">Editar usuario</a>
+        <% } else { %> <!-- Alumno -->
+            <p class="lead">Datos de usuario</p>
+            <a href="/usuarios/<%=usuarioActual.idusuarios%>" class="list-group-item">Datos de usuario</a>
+            <a href="/usuarios/<%=usuarioActual.idusuarios%>/edit" class="list-group-item">Editar usuario</a>
+        <% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+    <% } else if((typeof page !== 'undefined') && page == 'pfgspropuestos'){ %> 
+
+        <% if((typeof usuarioActual !== 'undefined') && usuarioActual.admin){ %> <!-- Administrador -->
+
+        <% } else if((typeof usuarioActual !== 'undefined') && usuarioActual.rol){ %> <!-- Profesor -->
+
+        <% } else { %> <!-- Alumno -->
+            <p class="lead">Selección de PFG</p>
+            <!-- <a href="/usuarios/<%=usuarioActual.idusuarios%>/edit" class="list-group-item">Datos de usuario</a> -->
+            <a href="/pfgspropuestos/seleccion" class="list-group-item">Selección PFG</a>
+            <!-- <a href="#" class="list-group-item">Rúbrica</a> -->
+        <% } %> <!-- Alumno -->
+    
+
+
+
+
+
+
+
+
+
+
+    <% } else if((typeof page !== 'undefined') && page == 'pfgs'){ %> 
+        <p class="lead">Gestión de PFGs</p>
+        <% if((typeof usuarioActual !== 'undefined') && usuarioActual.admin){ %> <!-- Administrador -->
+            <a href="/pfgs" class="list-group-item">PFGs</a>
+            <a href="/pfgs/nuevo" class="list-group-item">Nuevo PFG</a>
+            <a href="/pfgspropuestos/asignar" class="list-group-item">Asignar PFG propuesto</a>
+        <% } else if((typeof usuarioActual !== 'undefined') && usuarioActual.rol){ %> <!-- Profesor -->
+            <a href="/pfgs" class="list-group-item">PFGs</a>
+            <a href="/pfgs/nuevo" class="list-group-item">Nuevo PFG</a>
+            <a href="/pfgspropuestos/asignar" class="list-group-item">Asignar PFG propuesto</a>
+        <% } else { %> <!-- Alumno -->
+
+        <% } %> 
+
+
+
+
+
+
+
+
+
+
+    <% } else if((typeof page !== 'undefined') && page == 'plantillas'){ %> 
+        <% if((typeof usuarioActual !== 'undefined') && usuarioActual.admin){ %> <!-- Administrador -->
+            <p class="lead">Gestión de rúbricas</p>
+            <a href="/plantillas" class="list-group-item">Plantillas de rúbricas</a>
+            <a href="/plantillas/nuevo" class="list-group-item">Nueva plantilla</a>
+        <% } else if((typeof usuarioActual !== 'undefined') && usuarioActual.rol){ %> <!-- Profesor -->
+
+        <% } else { %> <!-- Alumno -->
+
+        <% } %> 
+
+
+
+
+
+
+    <% } else if((typeof page !== 'undefined') && page == 'rubricas'){ %> 
+        <p class="lead">Rúbricas</p>
+        <% if((typeof usuarioActual !== 'undefined') && usuarioActual.admin){ %> <!-- Administrador -->
+            <a href="/rubricas" class="list-group-item">Rúbricas</a>
+        <% } else if((typeof usuarioActual !== 'undefined') && usuarioActual.rol){ %> <!-- Profesor -->
+            <a href="/rubricas" class="list-group-item">Rúbricas</a>
+        <% } else { %> <!-- Alumno -->
+            <a href="/rubricas" class="list-group-item">Rúbricas</a>
+        <% } %>  
+
+
+
+
+    <% } else if((typeof page !== 'undefined') && page == 'comisiones'){ %> 
+        <p class="lead">Gestión de Comisión</p>
+        <% if((typeof usuarioActual !== 'undefined') && usuarioActual.admin){ %> <!-- Administrador -->
+            <a href="/comisiones" class="list-group-item">Gestión de Comisión</a>
+        <% } else if((typeof usuarioActual !== 'undefined') && usuarioActual.rol){ %> <!-- Profesor -->
+        <% } else { %> <!-- Alumno -->
+        <% } %> 
+
+
+
+    <% } else if((typeof page !== 'undefined') && page == 'cursos'){ %> 
+        <p class="lead">Gestión de Cursos</p>
+        <% if((typeof usuarioActual !== 'undefined') && usuarioActual.admin){ %> <!-- Administrador -->
+            <a href="/cursos" class="list-group-item">Gestión de Cursos</a>
+        <% } else if((typeof usuarioActual !== 'undefined') && usuarioActual.rol){ %> <!-- Profesor -->
+        <% } else { %> <!-- Alumno -->
+        <% } %> 
+    <% } %> 
+
+</div>
+
+

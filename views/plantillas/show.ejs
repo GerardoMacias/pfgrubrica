@@ -1,0 +1,117 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <!-- Menu ppal -->
+      <% include ../partials/menu-principal %>
+    </div>
+    <div class="col-md-9">
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading" style="text-align: center"><h1>Consulta de Rúbrica</h1></div>
+
+        <!--  -->
+
+        <div class="panel-body">
+          <% if (!rub.completa) { %>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center">
+                <label class="control-label">La rúbrica se encuentra incompleta.</label>
+              </div>
+            </div>
+          <% }; %>
+      
+          <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+              <label class="control-label">Titulo</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+              <p><%=rub.titulo%></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+              <label class="control-label">Descripción</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+              <p><%=rub.descripcion%></p>
+            </div>
+          </div>
+          <hr>
+
+          <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+              <label class="control-label">Preguntas</label>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+              <% pregs.forEach(function(p){ %>
+              <p><b>Peso:</b> <%=p.peso%>%</p>
+              <%})%>
+            </div> 
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+              <% pregs.forEach(function(p){ %>
+              <p>"<%=p.descripcion%>"</p>
+              <%})%>
+            </div>  
+          </div>
+          <hr>
+
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <a class="btn btn-sm btn-warning" href="/plantillas/<%=rub.idrubrica%>/edit">Editar</a>
+                  <% if((typeof usuarioActual !== 'undefined') && usuarioActual.admin){ %>
+                      <form class="form_borrado_plantilla" action="/plantillas/<%=rub.idrubrica %>?_method=DELETE" method="POST">
+                          <input type="submit" class="btn btn-sm btn-danger" value="Borrar" onclick="return confirm('¿Confirma el borrado de la plantilla de rúbrica?');">
+                      </form>
+                  <% } %>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <a href="/plantillas">Volver</a>
+              </div>
+          </div>
+
+          <hr>
+          <div class="row">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+              <label class="control-label"><b>PESO</b></label>
+            </div>
+            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
+              <label class="control-label"><b>CRITERIOS</b></label>
+            </div>  
+          </div>
+
+
+          <% secc.forEach(function(s){ %>
+          <div class="row" id="rubrica_row">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+              <p><%=s.peso%></p>
+            </div>
+            <% if (s.nivel==0) {%>
+              <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 <% if (s.nivel==0) {%> raiz <%} else if (s.es_criterio) {%> hoja <%} else {%> nodo <%}; %>">
+                <p><%=s.descripcion%></p>
+              </div> 
+            <% } else {%>
+              <div class="col-lg-<%=s.nivel%> col-md-<%=s.nivel%> col-sm-<%=s.nivel%> col-xs-<%=s.nivel%>"></div>
+              <div class="col-lg-<%=(11-s.nivel)%> col-md-<%=(11-s.nivel)%> col-sm-<%=(11-s.nivel)%> col-xs-<%=(11-s.nivel)%> <% if (s.nivel==0) {%> raiz <%} else if (s.es_criterio) {%> hoja <%} else {%> nodo <%}; %>">
+                <p><%=s.descripcion%></p>
+              </div>  
+            <% };%>
+          </div>
+          <% })%>
+          <hr>
+          
+          
+
+
+          
+        </div>
+
+      </div>  
+    </div>
+  </div>
+</div>
+
+
+
+<% include ../partials/footer %>

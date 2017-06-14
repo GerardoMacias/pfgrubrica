@@ -1,0 +1,148 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Editar plantilla de rúbrica</h1>
+                <hr>
+                <!--  -->
+                <div style="width: 90%; margin: 25px auto;">
+                    <form id="form_edit_plantilla" action="/plantillas/<%=rub.idrubrica%>?_method=PUT" method="POST">
+                        <div class="row form-group">
+                            <label for="nombre" class="col-sm-2 control-label">Titulo</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" name="titulo" value="<%=rub.titulo%>"  required>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="nombre" class="col-sm-2 control-label">Descripcion</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" name="descripcion" value="<%=rub.descripcion%>"   required>
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Preguntas</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        <input type="hidden" name="pregs_long" value="<%=pregs.length%>" />
+                        <div class="row form-group preg_0">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <input class="form-control" type="text" id="preg_0" name="preg[0]" value="<%=pregs[0].descripcion%>" required>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <input class="form-control" type="text" id="peso_0" name="peso[0]" value="<%=pregs[0].peso%>" required>
+                            </div>
+                        </div>
+                        <div class="row form-group preg_1">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <input class="form-control" type="text" id="preg_1" name="preg[1]" value="<%=pregs[1].descripcion%>" required>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <input class="form-control" type="text" id="peso_1" name="peso[1]" value="<%=pregs[1].peso%>" required>
+                            </div>
+                        </div>
+                        
+                        <% i=2;%>
+                        <% while (i < pregs.length) {%>
+                        <div class="row form-group preg_<%=i%>">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <input type="hidden" id="id_<%=i%>" name="id[<%=i%>]" value="<%=pregs[i].idpreguntas%>">
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <input class="form-control" type="text" id="preg_<%=i%>" name="preg[<%=i%>]" value="<%=pregs[i].descripcion%>" required>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <input class="form-control" type="text" id="preg_<%=i%>" name="peso[<%=i%>]" value="<%=pregs[i].peso%>" required>
+                            </div>
+                        </div>
+                        <% i++;%>
+                        <% }%>
+                        <div class="row form-group ancla">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <a class="btn btn-sm btn-primary anadirPregunta">Añadir nueva pregunta</a>
+                                <a class="btn btn-sm btn-danger quitarPregunta">Quitar pregunta</a>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-lg btn-primary btn-block">Editar</button>
+                        </div>
+                        
+                    </form>
+                    <a href="/plantillas/<%=rub.idrubrica%>">Volver</a>
+                </div>
+                        
+                        
+                <div style="width: 90%; margin: 25px auto;">
+                    <form id="form_plantilla" id="form_edit_plantilla" action="/plantillas/<%=rub.idrubrica%>/secciones/<%=rub.idrubrica%>?_method=PUT" method="PUT">
+                        <!-- Table -->
+                        <table class="table" id="tabla_rubrica">
+                            <thead>
+                                <tr>
+                                    <th>id</th><!-- style="display:none" -->
+                                    <th>PESO</th>
+                                    <th>CRITERIOS</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <% secc.forEach(function(s){ %>
+                                <tr class="<% if (s.nivel==0) {%> success <%} else if (s.es_criterio) {%> active <%} else {%> info <%}; %>">
+                                    <td><%=s.idsecciones%></td>
+                                    <td><%=s.peso%></td>
+                                    <td><div class="row">
+                                        <% if (s.nivel==0) {%>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <p><%=s.descripcion%></p>
+                                            </div> 
+                                        <% } else {%>
+                                            <div class="col-lg-<%=s.nivel%> col-md-<%=s.nivel%> col-sm-<%=s.nivel%> col-xs-<%=s.nivel%>"></div>
+                                            <div class="col-lg-<%=(12-s.nivel)%> col-md-<%=(12-s.nivel)%> col-sm-<%=(12-s.nivel)%> col-xs-<%=(12-s.nivel)%>">
+                                                <p><%=s.descripcion%></p>
+                                            </div>  
+                                        <% };%>
+                                        </div>
+                                    </td>
+                                    <td><%=s.idrubrica%></td>
+                                </tr>
+                            <% })%>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+<script src="/scripts/plantillas_editar.js"></script>
+
+<% include ../partials/footer %>
+

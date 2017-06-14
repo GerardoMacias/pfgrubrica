@@ -1,0 +1,89 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Nueva plantilla de rúbrica</h1>
+                <hr>
+                <!--  -->
+                <div style="width: 90%; margin: 25px auto;">
+                    <form id="form_plantilla" action="/plantillas" method="POST">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="titulo" placeholder="Titulo" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="descripcion" placeholder="Descripcion" required>
+                        </div>
+                        
+                        <div class="row form-group">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Preguntas</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <input class="form-control" type="text" id="preg_0" name="preg[0]" placeholder="Pregunta" required>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <input class="form-control" type="text" id="peso_0" name="peso[0]" placeholder="Peso" required>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <input class="form-control" type="text" id="preg_1" name="preg[1]" placeholder="Pregunta" required>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <input class="form-control" type="text" id="peso_1" name="peso[1]" placeholder="Peso" required>
+                            </div>
+                        </div>
+                        <div class="row form-group ancla">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <a class="btn btn-sm btn-primary anadirPregunta">Añadir nueva pregunta</a>
+                                <a class="btn btn-sm btn-danger quitarPregunta">Quitar pregunta</a>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button class="btn btn-lg btn-primary btn-block">Alta</button>
+                        </div>
+                        
+                    </form>
+                    <a href="/plantillas">Volver</a>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script src="/scripts/plantillas_nuevo.js"></script>
+
+<% include ../partials/footer %>
+

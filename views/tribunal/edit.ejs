@@ -1,0 +1,231 @@
+edit.ejs
+
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Editar Tribunal del PFG</h1>
+                <hr>
+                <!--  -->
+
+                <div style="width: 90%; margin: 25px auto;">
+                    <form id="formEditTribunal" action="/pfgs/<%=pfg.idpfg%>/tribunal?_method=PUT" method="POST">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Titulo</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <p><%=pfg.titulo%></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Descripción</label>
+                            </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <p><%=pfg.descripcion%></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Tutor</label>
+                            </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <p><%=pfg.u_a%>, <%=pfg.u_n%></p>
+                            </div>
+                        </div>
+                        <hr>
+                        
+
+                        <% var enc=false, aux=null;%>
+                        <div class="row form-group">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Presidente</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <select class="form-control" id="presidente" name="presidente" style="width:auto;">
+                                    <% trib.forEach(function(t){ %>
+                                        <% if(t.rol=='presidente'){ enc=true; aux=t.idprofesor;%>
+                                            <option value="<%= t.idprofesor %>"><%= t.u_a %>, <%= t.u_n %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                    <option value="no_asignado" <% if(!enc){%>selected<%}%>></option>
+                                    <% usus.forEach(function(u){ %>
+                                        <% if(u.idusuarios!=aux){ %>
+                                            <option value="<%= u.idusuarios %>"><%= u.apellidos %>, <%= u.nombre %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                </select> 
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Secretario</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <select class="form-control" id="secretario" name="secretario" style="width:auto;">
+                                    <% enc=false, aux=null;%>
+                                    <% trib.forEach(function(t){ %>
+                                        <% if(t.rol=='secretario'){ enc=true; aux=t.idprofesor;%>
+                                            <option value="<%= t.idprofesor %>"><%= t.u_a %>, <%= t.u_n %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                    <option value="no_asignado" <% if(!enc){%>selected<%}%>></option>
+                                    <% usus.forEach(function(u){ %>
+                                        <% if(u.idusuarios!=aux){ %>
+                                            <option value="<%= u.idusuarios %>"><%= u.apellidos %>, <%= u.nombre %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                </select> 
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        
+
+                        <% var vocal1=null, vocal2=null, vocal3=null %>
+                        
+                        <div class="row form-group">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Vocal 1</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <select class="form-control" id="vocal_1" name="vocal_1" style="width:auto;">
+                                    <% enc=false;%>
+
+                                    <% var i=0, enc=false; %>
+                                    <% while(!enc && i<trib.length){ %>
+                                        <% if(trib[i].rol=='vocal'){ %> 
+                                            <option value="<%= trib[i].idprofesor %>" selected><%=trib[i].u_a%>, <%=trib[i].u_n%></option>
+                                            <% vocal1=trib[i].idprofesor; enc=true; %>
+                                        <% } %>
+                                        <% i++;%>
+                                    <% }; %>
+                                    <option value="no_asignado" <% if(!enc){%>selected<%}%>></option>
+                                    <% usus.forEach(function(u){ %>
+                                        <% if(u.idusuarios!=vocal1){ %>
+                                            <option value="<%= u.idusuarios %>"><%= u.apellidos %>, <%= u.nombre %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                </select> 
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Vocal 2</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <select class="form-control" id="vocal_2" name="vocal_2" style="width:auto;">
+                                    <% var i=0, enc=false; %>
+                                    <% while(!enc && i<trib.length){ %>
+                                        <% if(trib[i].rol=='vocal' && trib[i].idprofesor!=vocal1){ %>
+                                            <option value="<%= trib[i].idprofesor %>" selected><%=trib[i].u_a%>, <%=trib[i].u_n%></option>
+                                            <% vocal2=trib[i].idprofesor; enc=true; %>
+                                        <% } %>
+                                        <% i++;%>
+                                    <% }; %>
+                                    <option value="no_asignado" <% if(!enc){%>selected<%}%>></option>
+                                    <% usus.forEach(function(u){ %>
+                                        <% if(u.idusuarios!=vocal2){ %>
+                                            <option value="<%= u.idusuarios %>"><%= u.apellidos %>, <%= u.nombre %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                </select> 
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Vocal 3</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <select class="form-control" id="vocal_3" name="vocal_3" style="width:auto;">
+                                    <% var i=0, enc=false; %>
+                                    <% while(!enc && i<trib.length){ %>
+                                        <% if(trib[i].rol=='vocal' && trib[i].idprofesor!=vocal1 && trib[i].idprofesor!=vocal2){ %>
+                                            <option value="<%= trib[i].idprofesor %>" selected><%=trib[i].u_a%>, <%=trib[i].u_n%></option>
+                                            <% vocal2=trib[i].idprofesor; enc=true; %>
+                                        <% } %>
+                                        <% i++;%>
+                                    <% }; %>
+                                    <option value="no_asignado" <% if(!enc){%>selected<%}%>></option>
+                                    <% usus.forEach(function(u){ %>
+                                        <% if(u.idusuarios!=vocal2){ %>
+                                            <option value="<%= u.idusuarios %>"><%= u.apellidos %>, <%= u.nombre %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                </select> 
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12"> 
+                                <button class="btn btn-md btn-primary">Editar</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                            <a href="/pfgs/<%= pfg.idpfg %>" class="center">Volver</a>
+                            </div>
+                        </div> 
+
+
+
+                        </form>
+                    </div>
+                    
+                </div>
+
+            </div> <!-- panel -->
+
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>
+
+
+
+

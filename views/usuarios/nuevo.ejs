@@ -1,0 +1,68 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Nuevo usuario</h1>
+
+                <!--  -->
+                <div style="width: 30%; margin: 25px auto;">
+                    <form action="/usuarios" method="POST">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="nombre" placeholder="Nombre">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="apellidos" placeholder="Apellidos">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="expediente" placeholder="Expediente">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="dni" placeholder="DNI">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="email" placeholder="E-mail">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="password" name="password" placeholder="Contraseña">
+                        </div>
+                        <div class="form-group">
+                            <div class="radio">
+                                <label>
+                                <input type="radio" name="rol" id="alumno" value="0" checked>
+                                    Alumno
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                <input type="radio" name="rol" id="profesor" value="1">
+                                    Profesor
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                <input type="radio" name="rol" id="admin" value="2">
+                                    Administrador
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-lg btn-primary btn-block">Alta</button>
+                        </div>
+                    </form>
+                    <a href="/usuarios">Volver</a>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>

@@ -1,0 +1,205 @@
+edic.ejs
+
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Editar Comisión</h1>
+                <hr>
+                <!--  -->
+
+                <div style="width: 90%; margin: 25px auto;">
+                    <form id="formEditComision" action="/comisiones/?_method=PUT" method="POST">
+
+                        <% var enc=false, aux=null;%>
+                        <div class="row form-group">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Presidente</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <select class="form-control" id="presidente" name="presidente" style="width:auto;">
+                                    <% com.forEach(function(c){ %>
+                                        <% if(c.rol=='presidente'){ enc=true; aux=c.idprofesor;%>
+                                            <option value="<%= c.idprofesor %>"><%= c.u_a %>, <%= c.u_n %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                    <option value="no_asignado" <% if(!enc){%>selected<%}%>></option>
+                                    <% usus.forEach(function(u){ %>
+                                        <% if(u.idusuarios!=aux){ %>
+                                            <option value="<%= u.idusuarios %>"><%= u.apellidos %>, <%= u.nombre %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                </select> 
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Secretario</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <select class="form-control" id="secretario" name="secretario" style="width:auto;">
+                                    <% enc=false, aux=null;%>
+                                    <% com.forEach(function(c){ %>
+                                        <% if(c.rol=='secretario'){ enc=true; aux=c.idprofesor;%>
+                                            <option value="<%= c.idprofesor %>"><%= c.u_a %>, <%= c.u_n %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                    <option value="no_asignado" <% if(!enc){%>selected<%}%>></option>
+                                    <% usus.forEach(function(u){ %>
+                                        <% if(u.idusuarios!=aux){ %>
+                                            <option value="<%= u.idusuarios %>"><%= u.apellidos %>, <%= u.nombre %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                </select> 
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        
+
+                        <% var vocal1=null, vocal2=null, vocal3=null %>
+                        
+                        <div class="row form-group">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Vocal 1</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <select class="form-control" id="vocal_1" name="vocal_1" style="width:auto;">
+                                    <% enc=false;%>
+
+                                    <% var i=0, enc=false; %>
+                                    <% while(!enc && i<com.length){ %>
+                                        <% if(com[i].rol=='vocal'){ %> 
+                                            <option value="<%= com[i].idprofesor %>" selected><%=com[i].u_a%>, <%=com[i].u_n%></option>
+                                            <% vocal1=com[i].idprofesor; enc=true; %>
+                                        <% } %>
+                                        <% i++;%>
+                                    <% }; %>
+                                    <option value="no_asignado" <% if(!enc){%>selected<%}%>></option>
+                                    <% usus.forEach(function(u){ %>
+                                        <% if(u.idusuarios!=vocal1){ %>
+                                            <option value="<%= u.idusuarios %>"><%= u.apellidos %>, <%= u.nombre %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                </select> 
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Vocal 2</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <select class="form-control" id="vocal_2" name="vocal_2" style="width:auto;">
+                                    <% var i=0, enc=false; %>
+                                    <% while(!enc && i<com.length){ %>
+                                        <% if(com[i].rol=='vocal' && com[i].idprofesor!=vocal1){ %>
+                                            <option value="<%= com[i].idprofesor %>" selected><%=com[i].u_a%>, <%=com[i].u_n%></option>
+                                            <% vocal2=com[i].idprofesor; enc=true; %>
+                                        <% } %>
+                                        <% i++;%>
+                                    <% }; %>
+                                    <option value="no_asignado" <% if(!enc){%>selected<%}%>></option>
+                                    <% usus.forEach(function(u){ %>
+                                        <% if(u.idusuarios!=vocal2){ %>
+                                            <option value="<%= u.idusuarios %>"><%= u.apellidos %>, <%= u.nombre %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                </select> 
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Vocal 3</label>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <select class="form-control" id="vocal_3" name="vocal_3" style="width:auto;">
+                                    <% var i=0, enc=false; %>
+                                    <% while(!enc && i<com.length){ %>
+                                        <% if(com[i].rol=='vocal' && com[i].idprofesor!=vocal1 && com[i].idprofesor!=vocal2){ %>
+                                            <option value="<%= com[i].idprofesor %>" selected><%=com[i].u_a%>, <%=com[i].u_n%></option>
+                                            <% vocal2=com[i].idprofesor; enc=true; %>
+                                        <% } %>
+                                        <% i++;%>
+                                    <% }; %>
+                                    <option value="no_asignado" <% if(!enc){%>selected<%}%>></option>
+                                    <% usus.forEach(function(u){ %>
+                                        <% if(u.idusuarios!=vocal2){ %>
+                                            <option value="<%= u.idusuarios %>"><%= u.apellidos %>, <%= u.nombre %></option>
+                                        <% }; %>
+                                    <% }); %>
+                                </select> 
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                                
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12"> 
+                                <button class="btn btn-md btn-primary">Editar</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                            <a href="/comisiones" class="center">Volver</a>
+                            </div>
+                        </div> 
+
+
+
+                        </form>
+                    </div>
+                    
+                </div>
+
+            </div> <!-- panel -->
+
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>
+
+
+
+

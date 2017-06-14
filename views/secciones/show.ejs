@@ -1,0 +1,106 @@
+
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Sección de rúbrica</h1>
+                <hr>
+                <!--  -->
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label pull-right">Criterio</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                            <p><%=secc.descripcion%></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label pull-right">Peso</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                            <p><%=secc.peso%></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <% if(!parseInt(secc.es_criterio)){ %>
+                <div class="panel-body">
+                    <form id="form_anadir_secciones" action="/plantillas/<%=secc.idrubrica%>/secciones/<%=secc.idsecciones%>/anadir" method="GET">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" id="tipo_seccion_s" name="tipo_seccion" value="secciones" checked>Secciones
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" id="tipo_seccion_c" name="tipo_seccion" value="criterios">Criterios
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <select class="form-control" name="num_anadir">
+                                <% for (var i=1; i<=20;i++){%><option><%=i;%></option><%};%>
+                            </select>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                             <input type="submit" class="btn btn-md btn-warning" value="Añadir a continuación de la sección">
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <hr>
+                <%};%>
+
+                <% var tipo = parseInt(secc.es_criterio) ? "criterio" : "seccion"; %>
+                
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                            <% if(secc.padre){ %>
+                                <a class="btn btn-sm btn-warning" href="/plantillas/<%=secc.idrubrica%>/secciones/<%=secc.idsecciones%>/edit">Editar <%=tipo;%></a>
+                                <a class="btn btn-sm btn-danger" href="/plantillas/<%=secc.idrubrica%>/secciones/<%=secc.idsecciones%>/borrar">Borrar <%=tipo;%></a>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                        <a href="/plantillas/<%=secc.idrubrica%>/edit" class="center">Volver</a>
+                        </div>
+                    </div> 
+                </div>
+                
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>
+
+

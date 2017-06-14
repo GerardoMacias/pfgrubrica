@@ -1,0 +1,58 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Listado de usuarios</h1>
+
+                <!-- Table -->
+                <div class="table-responsive">
+                    <table class="table table-condensed" id="listadoUsuarios">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>DNI</th>
+                                <th>Expediente</th>
+                                <th>E-mail</th>
+                                <th>Rol</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            <% if(typeof usuarios !== 'undefined'){ %>
+                                <% usuarios.forEach(function(usu){ %>
+                                <tr>
+                                    <td><%= usu.idusuarios %></td>
+                                    <td><%= usu.nombre %></td>
+                                    <td><%= usu.apellidos %></td>
+                                    <td><%= usu.dni %></td>
+                                    <td><%= usu.expediente %></td>
+                                    <td><%= usu.email %></td>
+                                    <td><% if (usu.admin){%>
+                                            Admin
+                                        <%}else if(!usu.rol){%>
+                                            Alumno
+                                        <%}else{%>
+                                            Profesor  
+                                        <%}%>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                            <% }; %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+
+<script src="scripts/usuarios.js"></script>
+<% include ../partials/footer %>

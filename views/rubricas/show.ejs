@@ -1,0 +1,262 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Editar rúbrica</h1>
+                <hr>
+                <!--  -->
+                <div style="width: 90%; margin: 25px auto;">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Titulo</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                            <p><%=rub.p_t%></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Descripción</label>
+                        </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                            <p><%=rub.p_d%></p>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <label class="control-label">Preguntas</label>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <% pregs.forEach(function(p){ %>
+                                <p><b>Peso:</b> <%=p.peso%>%</p>
+                            <%})%>
+                        </div> 
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                            <% pregs.forEach(function(p){ %>
+                                <p>"<%=p.descripcion%>"</p>
+                            <%})%>
+                        </div>  
+                    </div>
+                    
+
+                    <% if (rub.p_e1){%>
+                    <hr>
+                    <div class="well well-sm ">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12  text-center">
+                                <label class="control-label">Evaluada sección "Trabajo Autónomo" por tutor.</label>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Nota:</label> <%=eva_secc.a%>%
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <label class="control-label">Nota/total: </label> <%=rub.p_e1%>%
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <%}%>
+                    <% if (rub.p_e2){%>
+                    <div class="well well-sm ">
+                        <div class="row ">
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12  text-center">
+                                <label class="control-label">Evaluada sección "Memoria" por tribunal.</label>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Nota:</label> <%=eva_secc.b%>%
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <label class="control-label">Nota/total: </label> <%=rub.p_e2%>%
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <%}%>
+                    <% if (rub.p_e3){%>
+                    <div class="well well-sm ">
+                        <div class="row ">
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12  text-center">
+                                <label class="control-label">Evaluada sección "Defensa del PFG" por tribunal.</label>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <label class="control-label">Nota:</label> <%=eva_secc.c%>%
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <label class="control-label">Nota/total: </label> <%=rub.p_e3%>%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well well-sm ">
+                        <div class="row ">
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12  text-center">
+                                <label class="control-label">Nota final.</label>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <label class="control-label">Total: </label> <%=rub.p_nf%>%
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <%}%>
+                    <hr>
+                    <form id="form_edit_rubrica" action="/rubricas/<%=rub.idrubrica%>?_method=PUT" method="POST">
+                    <% if(rol_usu=="tutor" && eva_secc.a && !rub.p_e1){%>
+                    <%=rol_usu%>
+                    <%=eva_secc.a%>
+                        <div class="row form-group">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <input type="hidden" id="seccion" name="seccion" value="seccion1">
+                                <input type="hidden" id="idpfg" name="idpfg" value="<%=rub.p_id%>">
+                            </div>
+                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <button class="btn btn-lg btn-primary btn-block">Evaluar Trabajo Autónomo</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                
+                            </div>
+                        </div>
+                    <% } else if(rol_usu=="tribunal" && rub.p_e1){%>
+                        <% if(eva_secc.b && !rub.p_e2){%>
+                            
+                                <div class="row form-group">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <input type="hidden" id="seccion" name="seccion" value="seccion2">
+                                        <input type="hidden" id="idpfg" name="idpfg" value="<%=rub.p_id%>">
+                                    </div>
+                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                        <div class="form-group">
+                                            <button class="btn btn-lg btn-primary btn-block">Evaluar Memoria</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        
+                                    </div>
+                                </div>
+                        <% } else if(eva_secc.c && !rub.p_e3 && rub.p_e2){%>
+                                <div class="row form-group">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <input type="hidden" id="seccion" name="seccion" value="seccion3">
+                                        <input type="hidden" id="idpfg" name="idpfg" value="<%=rub.p_id%>">
+                                    </div>
+                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                        <div class="form-group">
+                                            <button class="btn btn-lg btn-primary btn-block">Evaluar Defensa</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        
+                                    </div>
+                                </div>
+                        <% }; %>
+                    <% } %>
+                    </form>
+                    <a href="/rubricas">Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <h1 style="text-align: center">Rúbrica</h1>
+                <hr>
+                <div style="width: 90%; margin: 25px auto;">
+                    <form id="form_edit_rubrica" id="form_edit_rubrica" action="/rubricas/<%=rub.idrubrica%>/criterios/<%=rub.idrubrica%>?_method=PUT" method="PUT">
+                        <!-- Table -->
+                        <% var l=Math.floor(12/pregs.length); %>
+                        <table class="table table-striped table-bordered" id="tabla_rubrica">
+                            <thead>
+                                <tr>
+                                    <th>id</th><!-- style="display:none" -->
+                                    <th>PESO</th>
+                                    <th>CRITERIOS</th>
+                                    <th></th>
+                                    <th>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <p>PREGUNTAS</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <% pregs.forEach(function(p){ %>
+                                                <div class="col-lg-<%=l%> col-md-<%=l%> col-sm-<%=l%> col-xs-<%=l%>">
+                                                    <p><%=p.descripcion.substring(0,8)%></p>
+                                                </div>
+                                            <% }); %>
+                                        </div>
+                                        <div class="row">
+                                            <% pregs.forEach(function(p){ %>
+                                                <div class="col-lg-<%=l%> col-md-<%=l%> col-sm-<%=l%> col-xs-<%=l%>">
+                                                    <p><%=p.peso%></p>
+                                                </div>
+                                            <% }); %>
+                                        </div>
+                                    </th>
+                                    <th>EVAL.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <%var x = 0;%>
+                            <% secc.forEach(function(s){ %>
+                                <% x = 0;%>
+                                <tr class="<% if (s.nivel==0) {%> success <%} else if (s.es_criterio) {%> active <%} else {%> info <%}; %>">
+                                    <td><%=s.idsecciones%></td>
+                                    <td><%=s.peso%></td>
+                                    <td><div class="row">
+                                        <% if (s.nivel==0) {%>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <p><%=s.descripcion%></p>
+                                            </div> 
+                                        <% } else {%>
+                                            <div class="col-lg-<%=s.nivel%> col-md-<%=s.nivel%> col-sm-<%=s.nivel%> col-xs-<%=s.nivel%>"></div>
+                                            <div class="col-lg-<%=(12-s.nivel)%> col-md-<%=(12-s.nivel)%> col-sm-<%=(12-s.nivel)%> col-xs-<%=(12-s.nivel)%>">
+                                                <p><%=s.descripcion%></p>
+                                            </div>  
+                                        <% };%>
+                                        </div>
+                                    </td>
+                                    <td><%=s.idrubrica%></td>
+                                    <td>
+                                        <div class="row">
+                                            <% pregs.forEach(function(p){ %>
+                                                <div class="col-lg-<%=l%> col-md-<%=l%> col-sm-<%=l%> col-xs-<%=l%>">
+                                                    <% if (s.evaluacion && (s.evaluacion==p.peso) && s.es_criterio) {%> 
+                                                        <p><%=p.peso%></p>
+                                                    <% } else {%>
+                                                        <p></p>
+                                                    <%}%>
+                                                </div>
+                                            <% }); %>
+                                        </div>
+                                    </td>
+                                    <td><% x=(s.evaluacion * s.peso)/100%><% if(s.evaluacion){%><%=x%><%} %></td>
+                                </tr>
+                            <% })%>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+<script src="/scripts/rubricas_editar.js"></script>
+
+<% include ../partials/footer %>

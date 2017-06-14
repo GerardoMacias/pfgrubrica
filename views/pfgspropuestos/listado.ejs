@@ -1,0 +1,96 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <!-- Menu ppal -->
+      <% include ../partials/menu-principal %>
+    </div>
+    <div class="col-md-9">
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <h1 style="text-align: center">Elección de PFGs propuestos</h1>
+        <hr>
+
+        <div style="width: 30%; margin: 25px auto;">
+          <form action="/pfgspropuestos/seleccion" method="POST" id="form_sel_pfgs_prop">
+            <div class="form-group">
+              <label for="prioridad1" style="center">1ª Elección</label>
+              <select class="form-control" id="sel_pr1" name="sel_pr1">
+                <option value=""></option>
+                <% if(typeof pfgs_p !== 'undefined'){ %>
+                <% pfgs_p.forEach(function(p){ %>
+                <option value="<%= p.idpfg %>"><%= p.codigo_prop %></option>
+                <% }); %>
+                <% }; %>
+              </select>                            
+            </div>
+
+            <div class="form-group">
+              <label for="prioridad2">2ª Elección</label>
+              <select class="form-control" id="sel_pr2" name="sel_pr2">
+                <option value=""></option>
+                <% if(typeof pfgs_p !== 'undefined'){ %>
+                <% pfgs_p.forEach(function(p){ %>
+                <option value="<%= p.idpfg %>"><%= p.codigo_prop %></option>
+                <% }); %>
+                <% }; %>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="prioridad3">3ª Elección</label>
+              <select class="form-control" id="sel_pr3" name="sel_pr3">
+                <option value=""></option>
+                <% if(typeof pfgs_p !== 'undefined'){ %>
+                <% pfgs_p.forEach(function(p){ %>
+                <option value="<%= p.idpfg %>"><%= p.codigo_prop %></option>
+                <% }); %>
+                <% }; %>
+              </select>                            
+            </div>
+
+            <div class="form-group">
+              <button class="btn btn-md btn-primary btn-block">Seleccionar PFGs</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+          <table id="tabla_pfgs_prop" class="table table-condensed"> <!-- table-bordered -->
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Titulo</th>
+                <th>Tutor</th>
+              </tr>
+            </thead> 
+            <tfoot>
+              <tr>
+                <th>Código</th>
+                <th>Titulo</th>
+                <th>Tutor</th>
+              </tr>
+            </tfoot> 
+            <tbody>
+              <% if(typeof pfgs_p !== 'undefined'){ %>
+              <% pfgs_p.forEach(function(p){ %>
+              <tr>
+                <td class="col-xs-1"><%= p.codigo_prop %></td>
+                <td class="col-xs-7"><%= p.titulo %></td>
+                <td class="col-xs-4"><%= p.tutor %></td>
+              </tr>
+              <% }); %>
+              <% }; %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/scripts/pfgspropuestos.js"></script>
+
+<% include ../partials/footer %>

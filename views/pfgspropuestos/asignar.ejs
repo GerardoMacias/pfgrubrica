@@ -1,0 +1,82 @@
+
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Menu ppal -->
+            <% include ../partials/menu-principal %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h1 style="text-align: center">Asignar PFG propuesto</h1>
+                <hr>
+                <!--  -->
+                
+                <div class="panel-body">
+                    <div style="width: 90%; margin: 25px auto;">
+                        <form id="formEdit" action="/pfgspropuestos/asignar/<%=pfgs_p.idseleccion_pfgs%>?_method=DELETE" method="POST">
+                            <div class="well well-sm">
+                                <div class="row form-group">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <label class="control-label ">Código</label>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                        <p class="text-left"><b><%=pfgs_p.codigo_prop%></b></p>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <label class="control-label ">Título</label>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                        <p class="text-left"><b><%=pfgs_p.titulo%></b></p>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <label class="control-label ">Tutor</label>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                        <p class="text-left"><b><%=pfgs_p_tutor.t_a%>, <%=pfgs_p_tutor.t_n%></b></p>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <label class="control-label ">Preferencia</label>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                        <p class="text-left"><b><%=pfgs_p.preferencia%></b></p>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <label class="control-label ">Alumno</label>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                        <p class="text-left"><b><%=pfgs_p.a_a%>, <%=pfgs_p.a_n%></b></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; margin: 25px auto;">
+                                <div class="form-group">
+                                    <button class="btn btn-lg btn-primary btn-block">Asignar</button>
+                                    <a href="/pfgspropuestos/asignar">Volver</a>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>  
+                </div>
+
+            </div> <!-- panel -->
+
+        </div>
+    </div>
+</div>
+
+<script src="/scripts/pfgs_edit.js"></script>
+
+<% include ../partials/footer %>
